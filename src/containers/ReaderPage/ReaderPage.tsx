@@ -18,6 +18,11 @@ const styles = (theme: Theme) =>
       ...theme.mixins.gutters(),
       paddingTop: theme.spacing.unit * 2,
       paddingBottom: theme.spacing.unit * 2
+    },
+    pageText: {
+      textAlign: "justify",
+      textAlignLast: "center",
+      MozTextAlignLast: "center"
     }
   });
 interface IState {
@@ -25,6 +30,7 @@ interface IState {
   series: Series;
   chapter: Chapter;
   pages: Page[];
+  pageParagraphs: string[];
   chapterList: Chapter[];
 }
 interface IProps extends WithStyles<typeof styles> {
@@ -39,7 +45,8 @@ class ReaderPage extends React.Component<
     series: {},
     chapter: {},
     pages: [],
-    chapterList: []
+    chapterList: [],
+    pageParagraphs: []
   };
   constructor(props: IProps & RouteComponentProps<any>) {
     super(props);
@@ -66,18 +73,23 @@ class ReaderPage extends React.Component<
             {this.state.series.title}
           </Typography>
           <Typography variant="headline" component="h4">
-            Chapter: {this.state.chapter.title}
+            {this.state.chapter.title}
           </Typography>
-          <Typography component="p">
-            {this.state.pages.map(page => page.pageContent)}
-            {/* Paper can be used to build surface or other elements for your
-            application. */}
-          </Typography>
+          <br />
+          <br />
+          {this.state.pageParagraphs.map((paragraph, i) => (
+            <Typography key={i} className={classes.pageText} component="p">
+              {paragraph}
+              <br />
+              <br />
+            </Typography>
+          ))}
         </Paper>
       </div>
     );
   }
   public getSeries = async () => {
+    this.state.isLoading = true;
     try {
       const res = await SeriesService.getSeries(
         this.props.match.params.seriesId
@@ -103,10 +115,26 @@ class ReaderPage extends React.Component<
       const res = await PagesService.getPagesByChapter(
         this.props.match.params.chapterId
       );
-      this.setState({ pages: res });
-      // tslint:disable-next-line:no-console
-      console.log(this.state.pages);
-      this.setState({ isLoading: false, chapterList: res });
+      const splitLines = require("split-lines");
+      let newPageParagraphs: string[] = [];
+      res.forEach((page: Page) => {
+        if (page.pageContent) {
+          page.pageContent = page.pageContent.replace(/\s\s+/g, '\r\n');
+          newPageParagraphs.push(...splitLines(page.pageContent));
+        }
+      });
+      newPageParagraphs = newPageParagraphs.filter(f => {
+        if (f !== "") {
+          return f;
+        }
+        return;
+      });
+      this.setState({
+        pages: res,
+        pageParagraphs: newPageParagraphs,
+        isLoading: false,
+        chapterList: res
+      });
     } catch (error) {
       // this.setState({ error, isLoading: false });
     }

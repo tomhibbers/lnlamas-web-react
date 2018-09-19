@@ -142,6 +142,7 @@ class SeriesPage extends React.Component<
     );
   }
   public getSeries = async () => {
+    this.state.isLoading = true;
     try {
       const res = await SeriesService.getSeries(this.props.match.params.id);
       this.setState({ isLoading: false, series: res });
