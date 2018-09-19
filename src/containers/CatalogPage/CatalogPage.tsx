@@ -24,7 +24,9 @@ const styles = (theme: Theme) =>
         width: 1100,
         marginLeft: "auto",
         marginRight: "auto"
-      }
+      },
+      alignContent: "center",
+      textAlign: "center"
     },
     cardGrid: {
       padding: `${theme.spacing.unit * 8}px 0`
@@ -68,6 +70,11 @@ class CatalogPage extends React.Component<WithStyles<typeof styles>, IState> {
     seriesList: []
   };
 
+  constructor(props: any) {
+    super(props);
+    this.getSeries();
+  }
+
   public render() {
     const { classes } = this.props;
 
@@ -81,7 +88,7 @@ class CatalogPage extends React.Component<WithStyles<typeof styles>, IState> {
     }
 
     return (
-      <div>
+      <div className={classes.layout}>
         <TextField
           className={classes.margin}
           id="search_input"
@@ -100,42 +107,40 @@ class CatalogPage extends React.Component<WithStyles<typeof styles>, IState> {
           Load!
         </Button> */}
         <Button onClick={this.getSeries}>Load!</Button>
-        <div className={classes.layout}>
-          <Grid container={true} spacing={40}>
-            {this.state.seriesList.map(series => (
-              <Grid item={true} key={series.title} sm={6} md={4} lg={3}>
-                <Card className={classes.card}>
-                  {!series.coverImageUri ? null : (
-                    <CardMedia
-                      className={classes.cardMedia}
-                      image={series.coverImageUri}
-                      title={series.title}
-                    />
-                  )}
-                  <CardContent className={classes.cardContent}>
-                    <Typography
-                      gutterBottom={true}
-                      variant="headline"
-                      component="h2"
-                    >
-                      {series.title}
-                    </Typography>
-                    <Typography component="p">{series.description}</Typography>
-                  </CardContent>
-                  <CardActions>
-                    <ButtonLink to="/series/">Read</ButtonLink>
-                    <ButtonLink to={`/series/${series._id}`}>Info</ButtonLink>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </div>
+        <Grid container={true} spacing={40}>
+          {this.state.seriesList.map(series => (
+            <Grid item={true} key={series.title} sm={6} md={4} lg={3}>
+              <Card className={classes.card}>
+                {!series.coverImageUri ? null : (
+                  <CardMedia
+                    className={classes.cardMedia}
+                    image={series.coverImageUri}
+                    title={series.title}
+                  />
+                )}
+                <CardContent className={classes.cardContent}>
+                  <Typography
+                    gutterBottom={true}
+                    variant="headline"
+                    component="h2"
+                  >
+                    {series.title}
+                  </Typography>
+                  <Typography component="p">{series.description}</Typography>
+                </CardContent>
+                <CardActions>
+                  <ButtonLink to="/series/">Read</ButtonLink>
+                  <ButtonLink to={`/series/${series._id}`}>Info</ButtonLink>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
       </div>
     );
   }
   public getSeries = async () => {
-    this.setState({ isLoading: true });
+    this.state.isLoading = true;
     try {
       const res = await SeriesService.getAllSeries();
       this.setState({ seriesList: res, isLoading: false });
