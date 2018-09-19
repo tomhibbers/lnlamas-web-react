@@ -33,9 +33,7 @@ interface IState {
   pageParagraphs: string[];
   chapterList: Chapter[];
 }
-interface IProps extends WithStyles<typeof styles> {
-  test: boolean;
-}
+interface IProps extends WithStyles<typeof styles> {}
 class ReaderPage extends React.Component<
   IProps & RouteComponentProps<any>,
   IState

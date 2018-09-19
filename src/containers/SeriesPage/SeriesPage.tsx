@@ -63,9 +63,7 @@ interface IState {
   series: Series;
   chapterList: Chapter[];
 }
-interface IProps extends WithStyles<typeof styles> {
-  test: boolean;
-}
+interface IProps extends WithStyles<typeof styles> {}
 class SeriesPage extends React.Component<
   IProps & RouteComponentProps<any>,
   IState
@@ -121,6 +119,9 @@ class SeriesPage extends React.Component<
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography gutterBottom={true} variant="headline" component="h2">
               Chapters
+              {this.state.chapterList
+                ? " (" + this.state.chapterList.length + ")"
+                : null}
             </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className="chapterContainer">
@@ -155,8 +156,6 @@ class SeriesPage extends React.Component<
       const res = await ChaptersService.getChaptersBySeries(
         this.props.match.params.id
       );
-      // tslint:disable-next-line:no-console
-      console.log(res);
       this.setState({ isLoading: false, chapterList: res.entity as Chapter[] });
     } catch (error) {
       // this.setState({ error, isLoading: false });

@@ -58,7 +58,6 @@ interface IState {
   isLoading: boolean;
   hits: any[];
   error: any;
-  isToggleOn: boolean;
   seriesList: Series[];
 }
 class CatalogPage extends React.Component<WithStyles<typeof styles>, IState> {
@@ -66,7 +65,6 @@ class CatalogPage extends React.Component<WithStyles<typeof styles>, IState> {
     isLoading: false,
     hits: [],
     error: null,
-    isToggleOn: true,
     seriesList: []
   };
 

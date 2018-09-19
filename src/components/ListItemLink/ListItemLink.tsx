@@ -25,3 +25,4 @@ export class ListItemLink extends React.PureComponent<IProps> {
     return <ListItem {...this.props} component={createLink} />;
   }
 }
+export default ListItemLink;
