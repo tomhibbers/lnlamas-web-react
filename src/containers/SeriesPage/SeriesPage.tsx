@@ -145,7 +145,7 @@ class SeriesPage extends React.Component<
     this.state.isLoading = true;
     try {
       const res = await SeriesService.getSeries(this.props.match.params.id);
-      this.setState({ isLoading: false, series: res });
+      this.setState({ series: res.entity as Series });
     } catch (error) {
       // this.setState({ error, isLoading: false });
     }
@@ -155,7 +155,9 @@ class SeriesPage extends React.Component<
       const res = await ChaptersService.getChaptersBySeries(
         this.props.match.params.id
       );
-      this.setState({ isLoading: false, chapterList: res });
+      // tslint:disable-next-line:no-console
+      console.log(res);
+      this.setState({ isLoading: false, chapterList: res.entity as Chapter[] });
     } catch (error) {
       // this.setState({ error, isLoading: false });
     }

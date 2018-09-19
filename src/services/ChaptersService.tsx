@@ -1,36 +1,9 @@
-import axios from "axios";
+import request from "./request-service";
 
-const ChaptersService = {
-  getAllChapters() {
-    return axios
-      .get("https://localhost:44372/api/chapters")
-      .then(result => {
-        return result.data;
-      })
-      .catch(error => {
-        throw error;
-      });
-  },
-  getChapters(id: string) {
-    return axios
-      .get(`https://localhost:44372/api/chapters/${id}`)
-      .then(result => {
-        return result.data;
-      })
-      .catch(error => {
-        throw error;
-      });
-  },
-  getChaptersBySeries(id: string) {
-    return axios
-      .get(`https://localhost:44372/api/chapters/byseries/${id}`)
-      .then(result => {
-        return result.data;
-      })
-      .catch(error => {
-        throw error;
-      });
-  }
-};
+const getAllChapters = () => request(`https://localhost:44372/api/chapters`);
+const getChapters = (id: string) =>
+  request(`https://localhost:44372/api/chapters/${id}`);
+const getChaptersBySeries = (id: string) =>
+  request(`https://localhost:44372/api/chapters/byseries/${id}`);
 
-export default ChaptersService;
+export default { getAllChapters, getChapters, getChaptersBySeries };

@@ -94,7 +94,7 @@ class ReaderPage extends React.Component<
       const res = await SeriesService.getSeries(
         this.props.match.params.seriesId
       );
-      this.setState({ series: res });
+      this.setState({ series: res.entity });
     } catch (error) {
       // this.setState({ error, isLoading: false });
     }
@@ -104,8 +104,7 @@ class ReaderPage extends React.Component<
       const res = await ChaptersService.getChapters(
         this.props.match.params.chapterId
       );
-      this.setState({ chapter: res });
-      this.setState({ isLoading: false, chapterList: res });
+      this.setState({ chapter: res.entity });
     } catch (error) {
       // this.setState({ error, isLoading: false });
     }
@@ -117,9 +116,9 @@ class ReaderPage extends React.Component<
       );
       const splitLines = require("split-lines");
       let newPageParagraphs: string[] = [];
-      res.forEach((page: Page) => {
+      res.entity.forEach((page: Page) => {
         if (page.pageContent) {
-          page.pageContent = page.pageContent.replace(/\s\s+/g, '\r\n');
+          page.pageContent = page.pageContent.replace(/\s\s+/g, "\r\n");
           newPageParagraphs.push(...splitLines(page.pageContent));
         }
       });
@@ -130,10 +129,9 @@ class ReaderPage extends React.Component<
         return;
       });
       this.setState({
-        pages: res,
-        pageParagraphs: newPageParagraphs,
         isLoading: false,
-        chapterList: res
+        pages: res.entity,
+        pageParagraphs: newPageParagraphs
       });
     } catch (error) {
       // this.setState({ error, isLoading: false });

@@ -19,6 +19,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "2.17.0",
     "reactstrap": "^6.4.0",
+    "rest": "^2.0.0",
     "split-lines": "^2.0.0",
     "swagger-client": "^3.8.20"
   },
@@ -38,7 +39,6 @@
     "axios-mock-adapter": "^1.15.0",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
-    "jest-mock-axios": "^2.1.11",
     "moxios": "^0.4.0",
     "typescript": "^3.0.3"
   },

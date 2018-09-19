@@ -143,7 +143,7 @@ class CatalogPage extends React.Component<WithStyles<typeof styles>, IState> {
     this.state.isLoading = true;
     try {
       const res = await SeriesService.getAllSeries();
-      this.setState({ seriesList: res, isLoading: false });
+      this.setState({ seriesList: res.entity, isLoading: false });
     } catch (error) {
       this.setState({ error, isLoading: false });
     }

@@ -1,0 +1,62 @@
+[
+  {
+    "_id": "5ba206cb15c2b2571c659356",
+    "pages": null,
+    "parentRef": "5ba206cb15c2b2571c659355",
+    "chapterRef": "5ba206cb15c2b2571c659356",
+    "firstPageUri": "https://www.readlightnovel.org/um-sorry-ive-been-reincarnated/chapter-1",
+    "title": "CH 1",
+    "subtitle": null,
+    "updated": ""
+  },
+  {
+    "_id": "5ba206cb15c2b2571c659358",
+    "pages": null,
+    "parentRef": "5ba206cb15c2b2571c659355",
+    "chapterRef": "5ba206cb15c2b2571c659358",
+    "firstPageUri": "https://www.readlightnovel.org/um-sorry-ive-been-reincarnated/chapter-10",
+    "title": "CH 10",
+    "subtitle": null,
+    "updated": ""
+  },
+  {
+    "_id": "5ba206cc15c2b2571c65935a",
+    "pages": null,
+    "parentRef": "5ba206cb15c2b2571c659355",
+    "chapterRef": "5ba206cc15c2b2571c65935a",
+    "firstPageUri": "https://www.readlightnovel.org/um-sorry-ive-been-reincarnated/chapter-100",
+    "title": "CH 100",
+    "subtitle": null,
+    "updated": ""
+  },
+  {
+    "_id": "5ba206cd15c2b2571c65935e",
+    "pages": null,
+    "parentRef": "5ba206cd15c2b2571c65935d",
+    "chapterRef": "5ba206cd15c2b2571c65935e",
+    "firstPageUri": "https://www.readlightnovel.org/-hackc-s-/chapter-1",
+    "title": "CH 1",
+    "subtitle": null,
+    "updated": ""
+  },
+  {
+    "_id": "5ba206ce15c2b2571c659360",
+    "pages": null,
+    "parentRef": "5ba206cd15c2b2571c65935d",
+    "chapterRef": "5ba206ce15c2b2571c659360",
+    "firstPageUri": "https://www.readlightnovel.org/-hackc-s-/chapter-10",
+    "title": "CH 10",
+    "subtitle": null,
+    "updated": ""
+  },
+  {
+    "_id": "5ba206ce15c2b2571c659362",
+    "pages": null,
+    "parentRef": "5ba206cd15c2b2571c65935d",
+    "chapterRef": "5ba206ce15c2b2571c659362",
+    "firstPageUri": "https://www.readlightnovel.org/-hackc-s-/chapter-11",
+    "title": "CH 11",
+    "subtitle": null,
+    "updated": ""
+  }
+]
