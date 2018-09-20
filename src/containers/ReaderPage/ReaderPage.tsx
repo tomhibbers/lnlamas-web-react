@@ -23,7 +23,11 @@ const styles = (theme: Theme) =>
       textAlign: "justify",
       textAlignLast: "center",
       MozTextAlignLast: "center"
-    }
+    },
+    loadingPanel: {
+      alignContent: "center",
+      textAlign: "center"
+    },
   });
 interface IState {
   isLoading: boolean;
@@ -57,7 +61,7 @@ class ReaderPage extends React.Component<
 
     if (this.state.isLoading) {
       return (
-        <div>
+        <div className={classes.loadingPanel}>
           <h4>Loading...</h4>
           <img src="/assets/images/loading.gif" />
         </div>
@@ -131,6 +135,16 @@ class ReaderPage extends React.Component<
         pages: res.entity,
         pageParagraphs: newPageParagraphs
       });
+    } catch (error) {
+      // this.setState({ error, isLoading: false });
+    }
+  };
+  public getChapters = async () => {
+    try {
+      const res = await ChaptersService.getChaptersBySeries(
+        this.props.match.params.seriesId
+      );
+      this.setState({ chapterList: res.entity });
     } catch (error) {
       // this.setState({ error, isLoading: false });
     }

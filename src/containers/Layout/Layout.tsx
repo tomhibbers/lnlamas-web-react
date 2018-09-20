@@ -36,9 +36,9 @@ const styles = (theme: Theme) =>
       position: "relative",
       display: "flex",
       height: "100%",
-      width: "100%",
-      alignContent: "center",
-      textAlign: "center"
+      width: "100%"
+      // alignContent: "center",
+      // textAlign: "center"
     },
     appBar: {
       position: "absolute",
@@ -65,7 +65,7 @@ const styles = (theme: Theme) =>
       padding: theme.spacing.unit * 3
     },
     primary: {},
-    icon: {}
+    icon: {},
   });
 
 interface IState {

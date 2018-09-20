@@ -52,6 +52,10 @@ const styles = (theme: Theme) =>
       objectFit: "cover",
       height: 140
       // width: 100
+    },
+    loadingPanel: {
+      alignContent: "center",
+      textAlign: "center"
     }
   });
 interface IState {
@@ -78,7 +82,7 @@ class CatalogPage extends React.Component<WithStyles<typeof styles>, IState> {
 
     if (this.state.isLoading) {
       return (
-        <div>
+        <div className={classes.loadingPanel}>
           <h4>Loading...</h4>
           <img src="/assets/images/loading.gif" />
         </div>

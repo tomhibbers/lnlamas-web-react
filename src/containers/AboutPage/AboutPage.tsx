@@ -9,14 +9,16 @@ const styles = (theme: Theme) =>
     root: {
       ...theme.mixins.gutters(),
       paddingTop: theme.spacing.unit * 2,
-      paddingBottom: theme.spacing.unit * 2
-    }
+      paddingBottom: theme.spacing.unit * 2,
+      alignContent: "center",
+      textAlign: "center"
+    },
   });
 class AboutPage extends React.Component<WithStyles<typeof styles>> {
   public render() {
     const { classes } = this.props;
     return (
-      <div>
+      <div className={classes.root}>
         <img src="/assets/images/chew.gif" />
         <Paper className={classes.root} elevation={1}>
           <Typography variant="headline" component="h3">

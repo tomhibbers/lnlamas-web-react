@@ -1,4 +1,4 @@
-import { ListItemText } from "@material-ui/core";
+import { ListItemText, Paper } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -21,23 +21,10 @@ import ChaptersService from "../../services/ChaptersService";
 import SeriesService from "../../services/SeriesService";
 const styles = (theme: Theme) =>
   createStyles({
-    layout: {
-      marginLeft: theme.spacing.unit * 3,
-      marginRight: theme.spacing.unit * 3,
-      [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
-        width: 1100,
-        marginLeft: "auto",
-        marginRight: "auto"
-      },
-      alignContent: "center",
-      textAlign: "center"
-    },
-    cardGrid: {
-      padding: `${theme.spacing.unit * 8}px 0`
-    },
     card: {
       display: "flex",
-      flexDirection: "column"
+      flexDirection: "column",
+      width: 250
     },
     cardMedia: {
       paddingTop: "56.25%" // 16:9
@@ -56,6 +43,13 @@ const styles = (theme: Theme) =>
       objectFit: "cover",
       height: 140
       // width: 100
+    },
+    loadingPanel: {
+      alignContent: "center",
+      textAlign: "center"
+    },
+    info: {
+      padding: theme.spacing.unit * 3
     }
   });
 interface IState {
@@ -83,7 +77,7 @@ class SeriesPage extends React.Component<
 
     if (this.state.isLoading) {
       return (
-        <div>
+        <div className={classes.loadingPanel}>
           <h4>Loading...</h4>
           <img src="/assets/images/loading.gif" />
         </div>
@@ -91,30 +85,115 @@ class SeriesPage extends React.Component<
     }
 
     return (
-      <div className={classes.layout}>
-        <Grid container={true} spacing={40}>
-          <Grid item={true} key={this.state.series.title} sm={6} md={4} lg={3}>
-            <Card className={classes.card}>
-              {!this.state.series.coverImageUri ? null : (
-                <CardMedia
-                  className={classes.cardMedia}
-                  image={this.state.series.coverImageUri}
-                  title={this.state.series.title}
-                />
-              )}
-              <CardContent className={classes.cardContent}>
-                <Typography
-                  gutterBottom={true}
-                  variant="headline"
-                  component="h2"
-                >
-                  {this.state.series.title}
-                </Typography>
-              </CardContent>
-            </Card>
+      <div>
+        <Grid container={true}>
+          <Grid item={true} xs={12}>
+            <Grid container={true} justify="center">
+              <Card className={classes.card}>
+                {!this.state.series.coverImageUri ? null : (
+                  <CardMedia
+                    className={classes.cardMedia}
+                    image={this.state.series.coverImageUri}
+                    title={this.state.series.title}
+                  />
+                )}
+                <CardContent className={classes.cardContent}>
+                  <Typography
+                    gutterBottom={true}
+                    variant="headline"
+                    component="h2"
+                    align="center"
+                  >
+                    {this.state.series.title}
+                  </Typography>
+                  <Typography align="center">
+                    Rating: {this.state.series.rating}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
           </Grid>
         </Grid>
         <br />
+        <Paper className={classes.info}>
+          {!this.state.series.description ? null : (
+            <div>
+              <Typography variant="headline" component="h2">
+                Description
+              </Typography>
+              <Typography component="p">
+                {this.state.series.description}
+              </Typography>
+              <br />
+            </div>
+          )}
+
+          {!this.state.series.titlesAlternative ? null : (
+            <div>
+              <Typography variant="headline" component="h2">
+                Alternative Titles
+              </Typography>
+              <Typography component="p">
+                {this.state.series.titlesAlternative.map(i => i)}
+              </Typography>
+              <br />
+            </div>
+          )}
+
+          {!this.state.series.genres ? null : (
+            <div>
+              <Typography variant="headline" component="h2">
+                Genres
+              </Typography>
+              <Typography component="p">
+                {this.state.series.genres.map(i => i)}
+              </Typography>
+              <br />
+            </div>
+          )}
+
+          {!this.state.series.tags ? null : (
+            <div>
+              <Typography variant="headline" component="h2">
+                Tags
+              </Typography>
+              <Typography component="p">
+                {this.state.series.tags.map(i => i)}
+              </Typography>
+              <br />
+            </div>
+          )}
+
+          {!this.state.series.author ? null : (
+            <div>
+              <Typography variant="headline" component="h2">
+                Author
+              </Typography>
+              <Typography component="p">{this.state.series.author}</Typography>
+              <br />
+            </div>
+          )}
+
+          {!this.state.series.updated ? null : (
+            <div>
+              <Typography variant="headline" component="h2">
+                Last Updated
+              </Typography>
+              <Typography component="p">{this.state.series.updated}</Typography>
+              <br />
+            </div>
+          )}
+
+          {!this.state.series.status ? null : (
+            <div>
+              <Typography variant="headline" component="h2">
+                Status
+              </Typography>
+              <Typography component="p">{this.state.series.status}</Typography>
+              <br />
+            </div>
+          )}
+        </Paper>
         <ExpansionPanel>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography gutterBottom={true} variant="headline" component="h2">
